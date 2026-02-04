@@ -70,7 +70,6 @@ public class FeedbackIngestaoService {
 
     private void publicarEvento(Feedback f) {
         try {
-            // Serializa o objeto Feedback completo para JSON
             String jsonBody = objectMapper.writeValueAsString(f);
 
             SendMessageRequest sendMsgRequest = SendMessageRequest.builder()

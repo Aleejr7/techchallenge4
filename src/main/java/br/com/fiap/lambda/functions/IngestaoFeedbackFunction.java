@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-@Named("ingestao-feedback")
+@Named("feedback-ingestao")
 public class IngestaoFeedbackFunction implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     @Inject
