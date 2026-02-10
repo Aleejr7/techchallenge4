@@ -10,7 +10,7 @@ public class FeedbackDTO {
 
     public FeedbackDTO() {}
 
-    public FeedbackDTO(String descricao, Integer nota) {
+    public FeedbackDTO(String descricao, int nota) {
         this.descricao = descricao;
         this.nota = nota;
     }

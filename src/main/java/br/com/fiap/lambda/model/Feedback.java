@@ -18,8 +18,8 @@ public class Feedback {
 
     public Feedback() {}
 
-    public Feedback(String descricao, Integer nota) {
-        if (nota == null || nota < 0 || nota > 10) {
+    public Feedback(String descricao, int nota) {
+        if (nota < 0 || nota > 10) {
             throw new IllegalArgumentException("A nota deve ser entre 0 e 10.");
         }
         if (descricao == null || descricao.isBlank()) {
