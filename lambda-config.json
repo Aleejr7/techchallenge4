@@ -1,0 +1,38 @@
+{
+  "region": "us-east-2",
+  "runtime": "java21",
+  "timeout": 30,
+  "memorySize": 512,
+  "functions": [
+    {
+      "name": "feedback-ingestao",
+      "handler": "io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest",
+      "description": "Função para ingestão de feedbacks via API Gateway",
+      "environment": {
+        "DYNAMO_TABLE_NAME": "feedback-table",
+        "SQS_QUEUE_URL": "https://sqs.us-east-2.amazonaws.com/YOUR_ACCOUNT_ID/feedback-queue"
+      },
+      "triggers": [
+        {
+          "type": "api-gateway",
+          "method": "POST",
+          "path": "/feedback"
+        }
+      ]
+    },
+    {
+      "name": "feedback-nivel-urgencia",
+      "handler": "io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest",
+      "description": "Função para processar nível de urgência dos feedbacks",
+      "environment": {},
+      "triggers": [
+        {
+          "type": "sqs",
+          "queueName": "feedback-queue",
+          "batchSize": 10
+        }
+      ]
+    }
+  ]
+}
+
