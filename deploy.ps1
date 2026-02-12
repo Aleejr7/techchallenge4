@@ -13,7 +13,7 @@ if ($LASTEXITCODE -eq 0) {
 
     # Deploy
     Write-Host "Fazendo deploy para AWS..." -ForegroundColor Green
-    aws lambda update-function-code --function-name feedback-ingestao --zip-file fileb://target/function.zip
+    aws lambda update-function-code --function-name feedback-ingestao --zip-file fileb://target/function.zip --region us-east-2
 
     if ($LASTEXITCODE -eq 0) {
         Write-Host ""

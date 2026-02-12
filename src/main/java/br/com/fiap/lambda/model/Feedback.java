@@ -13,7 +13,6 @@ public class Feedback {
     private int nota;
     private String descricao;
     private LocalDateTime dataAvaliacao;
-    private Urgencia nivelUrgencia;
 
 
     public Feedback() {}
@@ -62,13 +61,5 @@ public class Feedback {
 
     public void setDataAvaliacao(LocalDateTime dataAvaliacao) {
         this.dataAvaliacao = dataAvaliacao;
-    }
-
-    public Urgencia getNivelUrgencia() {
-        return nivelUrgencia;
-    }
-
-    public void setNivelUrgencia(Urgencia nivelUrgencia) {
-        this.nivelUrgencia = nivelUrgencia;
     }
 }

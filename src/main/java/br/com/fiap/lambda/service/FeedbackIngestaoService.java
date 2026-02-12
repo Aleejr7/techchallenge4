@@ -52,7 +52,6 @@ public class FeedbackIngestaoService {
             item.put("descricao", AttributeValue.builder().s(f.getDescricao()).build());
             item.put("nota", AttributeValue.builder().n(String.valueOf(f.getNota())).build());
             item.put("dataAvaliacao", AttributeValue.builder().s(f.getDataAvaliacao().toString()).build());
-            item.put("nivelUrgencia", AttributeValue.builder().s(null).build());
 
             PutItemRequest request = PutItemRequest.builder()
                     .tableName(tableName)
