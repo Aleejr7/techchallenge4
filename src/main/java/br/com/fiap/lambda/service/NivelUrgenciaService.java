@@ -3,6 +3,7 @@ package br.com.fiap.lambda.service;
 import br.com.fiap.lambda.model.Feedback;
 import br.com.fiap.lambda.util.Urgencia;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import org.jboss.logging.Logger;
 
 
@@ -10,6 +11,9 @@ import org.jboss.logging.Logger;
 public class NivelUrgenciaService {
 
     private static final Logger LOG = Logger.getLogger(NivelUrgenciaService.class);
+
+    @Inject
+    SnsService snsService;
 
     public Urgencia processarFeedback(Feedback feedback) {
         LOG.info("Processando feedback ID: " + feedback.getId());
@@ -41,7 +45,16 @@ public class NivelUrgenciaService {
     }
 
     private void emitirAlertaUrgenciaAlta(Feedback feedback) {
-        // publicarNotificacaoSNS(feedback);
+        LOG.info("Emitiando feedback ID: " + feedback.getId());
+        String assunto = "ALERTA: CURSO MAL AVALAIADO";
+
+        String mensagem = String.format(
+                "Um feedback urgente foi recebido.\n\nID: %s\nNota: %d\nDescrição: %s",
+                feedback.getId(),
+                feedback.getNota(),
+                feedback.getDescricao()
+        );
+        snsService.publicarNotificacaoSNS(assunto,mensagem);
     }
 
 }
