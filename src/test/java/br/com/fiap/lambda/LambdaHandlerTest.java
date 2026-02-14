@@ -1,5 +1,6 @@
 package br.com.fiap.lambda;
 
+import br.com.fiap.lambda.dto.FeedbackDTO;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -10,21 +11,20 @@ import static org.hamcrest.CoreMatchers.containsString;
 @QuarkusTest
 class LambdaHandlerTest {
     @Test
-    void testSimpleLambdaSuccess() throws Exception {
+    void testSimpleLambdaSuccess() {
         // you test your lambdas by invoking on http://localhost:8081
         // this works in dev mode too
 
-        Person in = new Person();
-        in.setName("Stu");
+        FeedbackDTO feedbackDTO = new FeedbackDTO("Teste de feedback", 8);
         given()
                 .contentType("application/json")
                 .accept("application/json")
-                .body(in)
+                .body(feedbackDTO)
                 .when()
                 .post()
                 .then()
-                .statusCode(200)
-                .body(containsString("Hello Stu"));
+                .statusCode(201)
+                .body(containsString("descricao"));
     }
 
 }
