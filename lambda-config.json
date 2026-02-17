@@ -32,7 +32,22 @@
           "batchSize": 10
         }
       ]
+    },
+    {
+      "name": "feedback-relatorio-semanal",
+      "handler": "io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest",
+      "description": "Função para geração de relatório estatístico semanal de feedbacks",
+      "environment": {
+        "TABLE_NAME": "feedback-db",
+        "SNS_TOPIC_ARN": "arn:aws:sns:us-east-2:791358129538:FeedbackUrgenteTopic",
+        "QUARKUS_LAMBDA_HANDLER": "relatorio-semanal"
+      },
+      "triggers": [
+        {
+          "type": "schedule",
+          "expression": "rate(5 minutes)"
+        }
+      ]
     }
   ]
 }
-
