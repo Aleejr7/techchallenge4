@@ -46,7 +46,7 @@ public class NivelUrgenciaService {
 
     private void emitirAlertaUrgenciaAlta(Feedback feedback) {
         LOG.info("Emitiando feedback ID: " + feedback.getId());
-        String assunto = "ALERTA: CURSO MAL AVALAIADO";
+        String assunto = "ALERTA: CURSO MAL AVALIADO";
 
         String mensagem = String.format(
                 "Um feedback urgente foi recebido.\n\nID: %s\nNota: %d\nDescrição: %s",

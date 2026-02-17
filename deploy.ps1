@@ -31,17 +31,17 @@ function Write-Header {
 
 function Write-Success {
     param([string]$Message)
-    Write-Host "✓ $Message" -ForegroundColor Green
+    Write-Host "[OK] $Message" -ForegroundColor Green
 }
 
 function Write-Error {
     param([string]$Message)
-    Write-Host "✗ $Message" -ForegroundColor Red
+    Write-Host "[ERRO] $Message" -ForegroundColor Red
 }
 
 function Write-Info {
     param([string]$Message)
-    Write-Host "→ $Message" -ForegroundColor Yellow
+    Write-Host ">> $Message" -ForegroundColor Yellow
 }
 
 # ============================================================================
@@ -114,7 +114,7 @@ foreach ($func in $functionsToeDeploy) {
     $functionExists = aws lambda get-function --function-name $func.name --region $REGION 2>$null
 
     if ($functionExists) {
-        # Atualizar código da função existente
+        # Atualizar APENAS o código da função (sem mexer em configurações)
         Write-Info "Atualizando código da função..."
 
         aws lambda update-function-code `
@@ -124,14 +124,6 @@ foreach ($func in $functionsToeDeploy) {
 
         if ($LASTEXITCODE -eq 0) {
             Write-Success "Código atualizado: $($func.name)"
-
-            # Atualizar configuração (timeout, memory, etc)
-            Write-Info "Atualizando configuração..."
-            aws lambda update-function-configuration `
-                --function-name $func.name `
-                --timeout $config.timeout `
-                --memory-size $config.memorySize `
-                --region $REGION | Out-Null
 
             $deployCount++
         } else {
